@@ -5,6 +5,7 @@ import { useState } from 'react'
 
 const windowHeight = Dimensions.get('window').height
 const windowWidth = Dimensions.get('window').width
+const boxSize = Math.trunc(Math.max(windowWidth, windowHeight) * 0.075);
 
 const color = [
     'red',
@@ -40,17 +41,15 @@ const Physics = (entities, {touches, time, dispatch}) => {
         }
     })
 
-    if(entities.Box.body.bounds.max.y >= 439 && entities.Floor.color != entities.Box.color){
+    if(entities.Box.body.bounds.max.y >= (windowHeight-boxSize*2)-(boxSize*1.5) && entities.Floor.color != entities.Box.color){
         Matter.Body.set(entities.Box, "color", randomBoxColor())
         Matter.Body.setPosition(entities.Box.body, {x: 180, y: 0})
         entities.Box.score = true
         dispatch({ type: 'new_point' })
-    }else if(entities.Box.body.bounds.max.y >= 439 && entities.Floor.color == entities.Box.color){
+    }else if(entities.Box.body.bounds.max.y >= (windowHeight-boxSize*2)-(boxSize*1.5) && entities.Floor.color == entities.Box.color){
         dispatch({ type: 'game_over' })
         console.log("game over")
     }
-
-    
     
     Matter.Engine.update(engine, time.delta)
     return entities

@@ -1,4 +1,4 @@
-import { View, TouchableOpacity, StyleSheet, Text, Dimensions } from 'react-native';
+import { View, TouchableOpacity, StyleSheet, Text, Dimensions, TouchableWithoutFeedback } from 'react-native';
 import React, {useState, useEffect} from 'react';
 import { GameEngine } from "react-native-game-engine";
 import Matter, { World } from "matter-js";
@@ -54,17 +54,19 @@ export default function App(){
 
         </GameEngine>
 
-        <View style={{ padding: 10, flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <View style={{ padding: 10, justifyContent: 'center', alignItems: 'center' }}>
           { !running ?
-            <TouchableOpacity style={{ backgroundColor: 'black', paddingHorizontal: 30, paddingVertical: 10, marginTop: 5 }}
+            <TouchableOpacity style={{ backgroundColor: 'black', paddingHorizontal: 30, paddingVertical: 10, marginTop: 5,  }}
               onPress={() => {
                 setScore(0)
                 setRunning(true)
                 gameEngine.swap(entities())
               }}>
-              <Text style={{ fontWeight: 'bold', color: 'white', fontSize: 30 }}>
-                START GAME
-              </Text>
+              <View>
+                <Text style={{ fontWeight: 'bold', color: 'white', fontSize: 30 }}>
+                  START GAME
+                </Text>
+              </View>
             </TouchableOpacity> : null
           }
           <Text style={{ textAlign: 'center', fontSize: 100, margin: 20, color: 'black' }}>{score}</Text>

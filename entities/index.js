@@ -12,9 +12,11 @@ export default restart => {
 
     let engine = Matter.Engine.create({enableSleeping: false})
 
+    
+
     let world = engine.world
 
-    let variableY = 0.2
+    let variableY = 0.6
 
     world.gravity.y = variableY;
 
